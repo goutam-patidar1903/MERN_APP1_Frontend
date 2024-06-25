@@ -1,7 +1,7 @@
 import React from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
-import axios from 'axios';
+import axios from '../axios';
 
 const WorkoutDetails=({workouts})=>{
 
