@@ -1,6 +1,7 @@
 import React from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
+import axios from 'axios';
 
 const WorkoutDetails=({workouts})=>{
 
@@ -8,12 +9,17 @@ const WorkoutDetails=({workouts})=>{
 
     const deleteHandler=async (ev)=>{
         const id=ev.target.getAttribute('id');
-    
-        const response = await fetch('/api/workouts/'+id , {method : 'DELETE'})
-        const json= await response.json();
-        if(response.ok) {
-            dispatch({type : 'DELETE_WORKOUT', payload: json})
-        } 
+        
+        try
+        {
+            const response = await axios.delete('/api/workouts/'+id);
+            const json=response.data;
+            console.log(json);
+            dispatch({type:"DELETE_WORKOUT" , payload : json});
+        }catch(error)
+        {
+            console.log(error.response.data.error);
+        }
     }
 
     return (

@@ -1,5 +1,6 @@
 import React from "react";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
+import axios from "../axios";
 
 const WorkoutAddForm=()=>{
 
@@ -16,30 +17,30 @@ const WorkoutAddForm=()=>{
 
         const workout = {title, load, reps}
 
-        const response= await fetch('/api/workouts',{
-            method:'POST',
-            body:JSON.stringify(workout),
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-        const json= await response.json();
-        if(!response.ok)
-        {   
-            setError(json.error);
-            setEmptyFields(json.emptyFields);
-        }
-        if(response.ok)
-            {
+        try
+        {
+            const response = await axios.post('/api/workouts',workout,{
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            });
+            const dataJSON=response.data;
+            if (response.status >= 200 && response.status < 300) {
+                // Response is OK
                 setTitle('');
                 setLoad('');
                 setReps('');
                 setError('');
                 setEmptyFields([]);
-                console.log(`New workout added successfully : ${JSON.stringify(json)}`)
-                dispatch({type:'CREATE_WORKOUT', payload: json})
-            }
-
+                console.log(`New workout added successfully: ${JSON.stringify(dataJSON)}`);
+                dispatch({ type: 'CREATE_WORKOUT', payload: dataJSON });
+              }
+        }catch(error)
+        {
+            const errorJSON=error.response.data;
+            setError(errorJSON.error);
+            setEmptyFields(errorJSON.emptyFields);
+        }
     }
 return (
     <>
