@@ -43,39 +43,54 @@ const WorkoutAddForm=()=>{
         }
     }
 return (
-    <>
-    <form onSubmit={onSubmitHandler}>
-        <h3>Add New Workout</h3>
+    <div className="flex-col justify-center">
+    <h3 className="text-yellow-300 font-bold px-3 py-3 text-[25px] mb-3">Add New Workout</h3>
+    <div className="border-2 border-yellow-300 rounded-md m-2 p-3 mb-10">
+    <div className="h-auto w-[380px] bg-slate-300 rounded-md p-3">
+    <form >
+        <div>
         {
-            error && <h5 style={{color:'red'}}>{error}</h5>
+            error && <div className="text-[red] pb-2 font-bold text-lg">{error}</div>
         }
-        <label>Title : </label>
-        <input 
-            type="text"
-            value={title}
-            onChange={(ev)=>{setTitle(ev.target.value)}}
-            style={emptyFields.includes('title')? {border: '2px solid red'} : {}}
-        /><br/>
-    
-        <label>Load : </label>
-        <input 
-            type="number"
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+            <div className=""><label>Title : </label></div>
+            <div className="">
+                <input className="border-[1px] border-black w-[95%]"
+                type="text"
+                value={title}
+                onChange={(ev)=>{setTitle(ev.target.value)}}
+                style={emptyFields.includes('title')? {border: '2px solid red'} : {}}
+                />
+            </div>
+            <div className=""><label>Load (in kg) : </label></div>
+            <div className="">
+                <input className="border-[1px] border-black w-[95%]"
+                type="number"
             value={load}
             onChange={(ev)=>{setLoad(ev.target.value)}}
             style={emptyFields.includes('load')? {border: '2px solid red'} : {}}
-        /><br/>
-
-        <label>Reps : </label>
-        <input 
-            type="number"
+                />
+            </div>
+            <div className=""><label>Reps : </label></div>
+            <div className="">
+                <input className="border-[1px] border-black w-[95%]"
+                 type="number"
             value={reps}
             onChange={(ev)=>{setReps(ev.target.value)}}
             style={emptyFields.includes('reps')? {border: '2px solid red'} : {}}
-        /><br/>
+                />
+            </div>
 
-        <button type="submit">Add Workout</button>
+        </div>
+
+        <div className="block bg-gray-700 text-center mt-4 text-yellow-300 rounded 
+        hover:bg-green-400 hover:text-black hover:cursor-pointer" onClick={onSubmitHandler} >Add Workout</div>
     </form>
-    </>
+    </div>
+    </div>
+    </div>
 )
 }
 

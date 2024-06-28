@@ -27,11 +27,18 @@ const WorkoutDetails=({workouts})=>{
             {
                 workouts.map((workout)=>{
                     return (
-                        <p key={workout._id} id={workout._id}>
-                        <b>Title : </b>{workout.title} <b>Load : </b>{workout.load} <b>Reps : </b>{workout.reps}    
-                        <span>{   formatDistanceToNow(new Date(workout.createdAt),{addSuffix:true})}</span>   
-                        <span className="material-symbols-outlined" onClick={deleteHandler} id={workout._id}>delete</span>
-                        </p> 
+                        <div key={workout._id} id={workout._id} className="flex py-3 ps-11 pe-7 bg-slate-300 rounded-md m-2 h-auto w-auto">
+                        
+                        <div className="w-full">
+                        <p><b>Title : </b>{workout.title} </p>
+                        <p><b>Load : </b>{workout.load} </p>
+                        <p> <b>Reps : </b>{workout.reps} </p>
+                        <p><b>Updated : </b>{   formatDistanceToNow(new Date(workout.createdAt),{addSuffix:true})}</p>
+                        </div>
+
+                        <div className="material-symbols-outlined ps-8 hover:text-red-700 hover:cursor-pointer" onClick={deleteHandler} id={workout._id}>delete</div>
+
+                        </div> 
                         
                     )
                 })

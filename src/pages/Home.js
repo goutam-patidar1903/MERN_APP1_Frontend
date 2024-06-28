@@ -34,14 +34,17 @@ const Home = ()=>{
     } , [dispatch])
 
     return (
-        <div>
-            <h2>Home</h2>
-            <div>
+        <div className="flex flex-wrap justify-around bg-gray-600 pb-4">
+            
+           <div className="flex-col justify-center">
+            <h2 className="text-yellow-300 font-bold px-3 py-3 text-[25px] mb-3">Records</h2>
+            <div className="border-2 border-yellow-300 h-auto w-full rounded-md">
             {
                 workouts && <WorkoutDetails workouts={workouts} />
             }
             </div>
-            <div>
+            </div>
+            <div className="flex-col justify-center">
                 <WorkoutAddForm />
             </div>
         </div>
